@@ -1,7 +1,7 @@
 import axios from 'axios'
 import path from 'path'
 import { config } from 'dotenv'
-import { authDataType, signInEndpoint } from './auth'
+import { type authDataType, signInEndpoint } from './auth'
 
 config({ path: path.join(__dirname, '../..', '.env') })
 
@@ -24,8 +24,8 @@ async function getFirebase() {
 
 async function getAuthenticatedFirebase() {
   const signedIn = await signInEndpoint(fakeUser)
-  const uid = signedIn.data.localId // get uid (= localId) to use node = cWAmXs9...
-  const { idToken } = signedIn.data // get idToken to auth
+  const uid = signedIn.data.localId // Get uid (= localId) to use node = cWAmXs9...
+  const { idToken } = signedIn.data // Get idToken to auth
 
   const databaseURL = `${process.env.FIREBASEDB_REST_API_BASE_URL}/notes/${uid}.json`
   const authToken = `?auth=${idToken}`
@@ -41,8 +41,8 @@ async function postFirebase() {
   // console.log(result.data)
 
   const signedIn = await signInEndpoint(fakeUser)
-  const uid = signedIn.data.localId // get uid (= localId) to auth and create node = cWAmXs9FEMa323MViK78ExO1GN02
-  const { idToken } = signedIn.data // get idToken to auth
+  const uid = signedIn.data.localId // Get uid (= localId) to auth and create node = cWAmXs9FEMa323MViK78ExO1GN02
+  const { idToken } = signedIn.data // Get idToken to auth
 
   const databaseURL = `${process.env.FIREBASEDB_REST_API_BASE_URL}/notes/${uid}.json`
   const authToken = `?auth=${idToken}`

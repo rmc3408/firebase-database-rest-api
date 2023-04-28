@@ -1,5 +1,5 @@
-import express, { Router, Response, Request } from 'express'
-import { Result, ValidationError, body, validationResult } from 'express-validator'
+import express, { type Router, type Response, type Request } from 'express'
+import { type Result, type ValidationError, body, validationResult } from 'express-validator'
 
 const signUpRouter: Router = express.Router()
 
