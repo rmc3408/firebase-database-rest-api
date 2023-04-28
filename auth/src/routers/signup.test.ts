@@ -1,7 +1,7 @@
 import request from 'supertest'
 import { app } from '../app'
 
-// BeforeAll(() => {})
+// beforeAll(() => {})
 
 // beforeEach(() => {})
 
@@ -16,18 +16,14 @@ type RequestBodyType = {
 
 const requestBody: RequestBodyType = {
   email: 'rmc@gmail.com',
-  password: 'secret123',
-}
-const wrongEmailRequestBody: RequestBodyType = {
-  email: 'rmc.gamil.com',
-  password: '123',
+  password: 'Secret123',
 }
 
 describe('SIGN UP', () => {
   test('it returns 422 status code if email not valid', async () => {
     await request(app).post('/api/auth/signup').send({ email: '' }).expect(422)
 
-    await request(app).post('/api/auth/signup').send(wrongEmailRequestBody).expect(422)
+    await request(app).post('/api/auth/signup').send({ email: 'a2.com', password: 'Secret123' }).expect(422)
     // .then((res) => console.log(res.body))
   })
 
@@ -40,5 +36,14 @@ describe('SIGN UP', () => {
     await request(app).get('/api/auth/signup').expect(405)
     await request(app).put('/api/auth/signup').expect(405)
     await request(app).delete('/api/auth/signup').expect(405)
+  })
+
+  // password must contains at least 6 letters, one lowecase and one uppercase and one numbers
+  test('it returns 422 status code if password not valid', async () => {
+    await request(app).post('/api/auth/signup').send({ email: 'a@2.com', password: 'Secret123' }).expect(201)
+    await request(app).post('/api/auth/signup').send({ email: 'a@2.com', password: 'Sa3' }).expect(422)
+    await request(app).post('/api/auth/signup').send({ email: 'a@2.com', password: 'secret123' }).expect(422)
+    await request(app).post('/api/auth/signup').send({ email: 'a@2.com', password: 'SECRET123' }).expect(422)
+    await request(app).post('/api/auth/signup').send({ email: 'a@2.com', password: 'Secret' }).expect(422)
   })
 })

@@ -2,7 +2,6 @@ import express, { Express, Request, Response } from 'express'
 import bodyParser from 'body-parser'
 import signUpRouter from './routers/signup'
 
-
 // App initialization and settings
 const app: Express = express()
 app.use(bodyParser.json())

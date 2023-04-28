@@ -1,12 +1,13 @@
 module.exports = {
-  plugins: ['@typescript-eslint', 'import', 'eslint-plugin-prettier'],
-  extends: ['airbnb-typescript-prettier'],
+  plugins: ['@typescript-eslint', 'import', 'eslint-plugin-prettier', 'prettier'],
+  extends: ['airbnb-typescript-prettier', 'prettier', 'prettier/@typescript-eslint'],
 	parserOptions: {
 		ecmaVersion: 'latest',
 	},
 	rules: {
     '@typescript-eslint/no-non-null-assertion': 'off',
-    'no-console': 0,
+    'no-console': 1,
+    "quotes": 'error'
   },
   settings: {
     react: {

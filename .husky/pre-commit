@@ -3,3 +3,4 @@
 
 cd auth
 npm run lint
+git add .
