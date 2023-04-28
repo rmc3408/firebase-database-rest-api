@@ -5,10 +5,13 @@
   "main": "connection.ts",
   "scripts": {
     "start": "nodemon src/connection.ts",
-    "lint": "prettier --write ./src/**/*.ts & eslint --fix src/**/*.ts",
-    "test": "jest",
+    "lint": "prettier --write ./src/**/*.ts & eslint --fix src/**/*.ts && jest",
     "test:all": "jest --watchAll --no-cache"
   },
+  "lint-staged": {
+    "src/**/*.ts": ["npm run lint", "git add ."]
+  },
+  "husky": { "hooks": { "pre-commit": "lint-staged" }},
   "jest": {
     "testEnvironment": "node",
     "preset": "ts-jest"
